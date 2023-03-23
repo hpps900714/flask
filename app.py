@@ -74,6 +74,6 @@ def getSum(): # min+(min+1)+(min+2)+(min+3)+max
     return "最小值加總到最大值: "+str(result)
 
 #啟動網站伺服器
-app.run(port=777)
+app.run(port=6969)
 
  
