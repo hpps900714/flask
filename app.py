@@ -1,6 +1,7 @@
 from flask import Flask #載入 Flask
 from flask import request #載入 requeast
 from flask import redirect #載入 redirect
+from flask import render_template #載入render_template
 import json #載入json
 # 建立application 物件,設定靜態檔案的路徑處理
 app=Flask(
@@ -9,33 +10,39 @@ app=Flask(
     static_url_path="/"#靜態檔案對應的網路路徑
 )
 
-@app.route("/zh-tw/")
-def index_chinese_Taiwan():
-    return json.dumps({"language":"zh-tw","text":"您好 flask"},ensure_ascii =False)# 指示ascii編碼不處理中文
+# @app.route("/zh-tw/")
+# def index_chinese_Taiwan():
+#     return json.dumps({"language":"zh-tw","text":"您好 flask"},ensure_ascii =False)# 指示ascii編碼不處理中文
 
-@app.route("/zh-ja/")
-def index_Japan():
-    return json.dumps({"language":"ja","text":"こんにちはフラスコ"},ensure_ascii =False) # 指示ascii編碼不處理日文
+# @app.route("/zh-ja/")
+# def index_Japan():
+#     return json.dumps({"language":"ja","text":"こんにちはフラスコ"},ensure_ascii =False) # 指示ascii編碼不處理日文
 
-@app.route("/en-us/")
-def index_English():
-    return json.dumps({"language":"en-us","text":"Hello flask"})#回傳網站首頁的內容
+# @app.route("/en-us/")
+# def index_English():
+#     return json.dumps({"language":"en-us","text":"Hello flask"})#回傳網站首頁的內容
 
-#建立路徑 / 對應的處理函式
+# #建立路徑 / 對應的處理函式
+# @app.route("/")
+# def index(): #用來回應路徑 / 的處理函式
+#     lang = request.headers.get("accept-language")
+#     lang_priority = lang.split(",")[0]
+#     print(lang_priority) #輸出第一個語言偏好
+    
+#     if lang_priority ==("ja"):
+#         return redirect("/zh-ja/")
+    
+#     elif lang_priority ==("zh-TW"):
+#         return redirect("/zh-tw/")
+    
+#     else :
+#         return redirect("/en-us/")
+
 @app.route("/")
-def index(): #用來回應路徑 / 的處理函式
-    lang = request.headers.get("accept-language")
-    lang_priority = lang.split(",")[0]
-    print(lang_priority) #輸出第一個語言偏好
-    
-    if lang_priority ==("ja"):
-        return redirect("/zh-ja/")
-    
-    elif lang_priority ==("zh-TW"):
-        return redirect("/zh-tw/")
-    
-    else :
-        return redirect("/en-us/")
+def index():
+    return render_template("index")
+
+
 #建立路徑 /data 對應的處理函式
 @app.route("/data")
 def getData():
