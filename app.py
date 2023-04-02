@@ -40,7 +40,7 @@ app=Flask(
 
 @app.route("/")
 def index():
-    return render_template("index")
+    return render_template("index.html")
 
 
 #建立路徑 /data 對應的處理函式
@@ -64,6 +64,10 @@ def getUser(name):
     elif name == "趙彥銘":
         return "趙彥銘真高"
     else: return name+"名單內查無此人"
+
+@app.route("/Sum_index.html")
+def Sum_index():
+    return render_template("Sum_index.html")
 
 #建立路徑/getSum 對應的處理函式
 # 利用要求字串(Query String) 提供彈性: /getSum?min=最小數值&max=最大數值    
